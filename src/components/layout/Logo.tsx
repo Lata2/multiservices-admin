@@ -1,0 +1,32 @@
+import { cn } from '@/lib/cn';
+import type { Panel } from '@/types/admin';
+
+export function LogoMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={cn('h-9 w-9 shrink-0', className)} aria-hidden>
+      <defs>
+        <linearGradient id="lg-mark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="var(--panel-from)" />
+          <stop offset="1" stopColor="var(--panel-to)" />
+        </linearGradient>
+      </defs>
+      <rect width="64" height="64" rx="16" fill="url(#lg-mark)" />
+      <path d="M41 22.5c-2.2-2.3-5.4-3.5-9.2-3.5-6 0-10 3.2-10 7.8 0 4.4 3.4 6.4 9.2 7.6 4 .8 5.4 1.6 5.4 3.2 0 1.8-1.9 3-4.9 3-3.2 0-5.8-1.3-7.7-3.6l-3.6 4.2c2.6 3 6.6 4.8 11.2 4.8 6.6 0 10.8-3.3 10.8-8.3 0-4.6-3.3-6.5-9.4-7.7-3.8-.8-5.2-1.5-5.2-3 0-1.6 1.6-2.6 4.2-2.6 2.6 0 4.8 1 6.4 2.8z" fill="#fff" />
+      <circle cx="47" cy="45" r="4" fill="#fba924" />
+    </svg>
+  );
+}
+
+export function Logo({ panel, collapsed, inverse }: { panel?: Panel; collapsed?: boolean; inverse?: boolean }) {
+  return (
+    <span className="flex min-w-0 items-center gap-2.5">
+      <LogoMark />
+      {!collapsed ? (
+        <span className="min-w-0 leading-tight">
+          <span className={cn('block text-md font-extrabold tracking-tight', inverse ? 'text-white' : 'text-ink')}>Servio</span>
+          {panel ? <span className={cn('block text-xs font-semibold', inverse ? 'text-white/55' : 'text-ink-3')}>{panel === 'super' ? 'Super Admin' : 'Admin console'}</span> : null}
+        </span>
+      ) : null}
+    </span>
+  );
+}

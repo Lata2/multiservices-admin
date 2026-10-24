@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Servio Console</title>
+    <meta name="description" content="Servio Admin & Super Admin console" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#3B5FE9" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Apply the saved theme before first paint to avoid a flash.
+      try {
+        var t = JSON.parse(localStorage.getItem('servio-console-ui') || '{}').state?.theme || 'system';
+        var dark = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    </script>
+    <style>
+      #boot{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#F6F7FB}
+      .dark #boot{background:#0b1020}
+      #boot span{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#5f82f4,#2338A3);box-shadow:0 10px 28px rgb(59 95 233/.32);animation:boot 1.2s ease-in-out infinite}
+      @keyframes boot{50%{transform:scale(.9);opacity:.7}}
+      @media (prefers-reduced-motion:reduce){#boot span{animation:none}}
+    </style>
+  </head>
+  <body>
+    <div id="root"><div id="boot" aria-label="Loading Servio Console" role="status"><span></span></div></div>
+    <noscript>Servio Console needs JavaScript.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
